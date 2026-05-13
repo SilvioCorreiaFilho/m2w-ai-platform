@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ──────────────────────────────────────────────── */
+:root {
+  --ink:          #0A0A08;
+  --ink-warm:     #141410;
+  --cream:        #EDE8DC;
+  --cream-muted:  #7A7570;
+  --lime:         #C2FF3D;
+  --ember:        #FF3B1A;
+  --cream-border: rgba(237, 232, 220, 0.10);
+  --cream-faint:  rgba(237, 232, 220, 0.05);
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-syne), system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+/* ─── Lenis ──────────────────────────────────────────────────────── */
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+
+/* ─── Selection ──────────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(194, 255, 61, 0.25);
+  color: var(--ink);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--lime); border-radius: 0; }
+
+/* ─── Film grain overlay ─────────────────────────────────────────── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  mix-blend-mode: overlay;
+}
+
+/* ─── Focus ──────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 1px solid var(--lime);
+  outline-offset: 3px;
+}
+
+/* ─── Autofill ───────────────────────────────────────────────────── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--ink-warm) inset;
+  -webkit-text-fill-color: var(--cream);
+  caret-color: var(--cream);
+}
+
+/* ─── Editorial horizontal rule ──────────────────────────────────── */
+.rule {
+  width: 100%;
+  height: 1px;
+  background: var(--cream-border);
+}
+
+/* ─── Section chapter number ─────────────────────────────────────── */
+.chapter-number {
+  font-family: var(--font-space-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--lime);
+  text-transform: uppercase;
+}
+
+/* ─── GSAP will-change hints ─────────────────────────────────────── */
+.hero-line,
+.hero-sub,
+.hero-ctas,
+.hero-video,
+.hero-stats,
+.portfolio-card,
+.service-chapter,
+.contact-field,
+.nav-item {
+  will-change: transform, opacity;
+}
+
+/* ─── Marquee ────────────────────────────────────────────────────── */
+.marquee-track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: marquee 32s linear infinite;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Clip-path reveal (GSAP starter state) ──────────────────────── */
+.clip-reveal {
+  clip-path: inset(0 100% 0 0);
+}
+
+/* ─── Italic display utility ─────────────────────────────────────── */
+.italic-display {
+  font-family: var(--font-cormorant);
+  font-style: italic;
+}
+
+/* ─── Underline input (editorial style) ──────────────────────────── */
+.input-editorial {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--cream-border);
+  border-radius: 0;
+  color: var(--cream);
+  font-family: var(--font-syne);
+  font-size: 0.875rem;
+  padding: 0.625rem 0;
+  width: 100%;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.input-editorial::placeholder {
+  color: var(--cream-muted);
+  font-family: var(--font-space-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.input-editorial:focus {
+  border-bottom-color: var(--lime);
+}
+
+/* ─── Video card grain effect ────────────────────────────────────── */
+.video-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 128px;
+  opacity: 0.04;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ─── Lime accent line ───────────────────────────────────────────── */
+.accent-line {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--lime);
+  vertical-align: middle;
+}
+
+/* ─── Hover link editorial ───────────────────────────────────────── */
+.link-editorial {
+  position: relative;
+  color: var(--cream);
+  text-decoration: none;
+  font-family: var(--font-space-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.link-editorial::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--lime);
+  transition: width 0.3s ease;
+}
+
+.link-editorial:hover {
+  color: var(--lime);
+}
+
+.link-editorial:hover::after {
+  width: 100%;
+}
+
+/* ─── Diagonal stripe accent ─────────────────────────────────────── */
+.stripe-accent {
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 2px,
+    rgba(194, 255, 61, 0.06) 2px,
+    rgba(194, 255, 61, 0.06) 4px
+  );
+}

@@ -72,6 +72,9 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  other: {
+    "m2w-deploy-version": "landing-v3-2026-05-14",
+  },
 };
 
 export const viewport: Viewport = {

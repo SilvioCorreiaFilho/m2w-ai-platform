@@ -1,0 +1,4 @@
+M2W AI Solutions
+deploy-version=landing-v3-2026-05-14
+expected-title=M2W AI Solutions | Avatar de IA para TikTok Shop e Influencer Digital
+expected-contact=contato@m2w-ai.com

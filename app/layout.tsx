@@ -1,104 +1,89 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Space_Mono, Syne } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import { Navbar } from "@/components/Navbar";
-import { CanvasClient } from "./canvas-client";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-cormorant",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-display",
+  weight: ["300", "400", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const spaceMono = Space_Mono({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-space-mono",
-  weight: ["400", "700"],
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "700", "900"],
   display: "swap",
 });
 
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-syne",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
+const siteUrl = "https://m2w-ai.com";
 
 export const metadata: Metadata = {
-  title: "M2W — Marketing to Win | Influenciadora Digital IA",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "M2W AI Solutions | Avatar de IA para TikTok Shop e Influencer Digital",
+    template: "%s | M2W AI Solutions",
+  },
   description:
-    "Plataforma de influência digital e avatares gerados por IA. Persona Mia Park para TikTok Shop, Fanvue e automação comercial B2B. Resultados reais, 24/7.",
+    "Influencers digitais de IA para TikTok Shop, live commerce e conteúdo UGC. Troque cachês altos por uma operação de avatar de IA a partir de R$2.490/mês.",
   keywords: [
-    "influencer digital",
-    "avatar IA",
-    "TikTok Shop",
-    "Fanvue",
-    "marketing digital",
-    "Mia Park",
-    "M2W",
-    "Marketing to Win",
+    "avatar de IA para TikTok Shop",
+    "influencer digital de IA",
+    "influencer virtual para marcas",
+    "conteúdo com IA para TikTok Shop",
+    "avatar IA para live commerce",
+    "alternativa a influencer humano",
+    "micro influencer custo por post",
+    "marketing de influência com IA",
+    "conteúdo UGC com IA",
+    "automação de conteúdo para marcas",
   ],
-  authors: [{ name: "M2W — Marketing to Win", url: "https://m2w-ai.com" }],
+  alternates: { canonical: siteUrl },
+  authors: [{ name: "M2W AI Solutions", url: siteUrl }],
+  creator: "M2W AI Solutions",
+  publisher: "M2W AI Solutions",
   openGraph: {
-    title: "M2W — Influência Digital. Resultados Reais.",
+    title: "M2W AI Solutions | Avatar de IA para TikTok Shop",
     description:
-      "Avatar digital de IA que converte 24/7. TikTok Shop, Fanvue e automação B2B.",
-    url: "https://m2w-ai.com",
-    siteName: "M2W Platform",
+      "Conteúdo diário, live commerce e UGC com avatar de IA para marcas no Brasil. Diagnóstico gratuito e setup básico em 48h.",
+    url: siteUrl,
+    siteName: "M2W AI Solutions",
     locale: "pt_BR",
     type: "website",
+    images: [{ url: "/logo.png", width: 512, height: 512, alt: "Logo M2W AI Solutions" }],
   },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: "summary_large_image",
+    title: "M2W AI Solutions | Influencer Digital de IA",
+    description:
+      "Avatar de IA para TikTok Shop, conteúdo UGC e automação de conteúdo para marcas brasileiras.",
+    images: ["/logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0A0A08",
+  themeColor: "#050508",
   colorScheme: "dark",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${cormorant.variable} ${spaceMono.variable} ${syne.variable} dark`}
-      suppressHydrationWarning
-    >
-      <body className="bg-ink text-cream font-sans antialiased">
-        {/* WebGL background — client-only, skips SSR */}
-        <CanvasClient />
-
-        <Providers>
-          <Navbar />
-          {children}
-
-          <footer className="border-t border-cream-border py-10 px-8">
-            <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-xs tracking-[0.3em] text-cream">M2W</span>
-                <span className="w-8 h-px bg-cream-border" />
-                <span className="font-mono text-xs tracking-[0.2em] text-cream-muted uppercase">
-                  Marketing to Win
-                </span>
-              </div>
-              <p className="font-mono text-xs text-cream-muted tracking-[0.15em]">
-                © {new Date().getFullYear()} M2W Platform. Todos os direitos reservados.
-              </p>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs text-cream-muted">Gerado com</span>
-                <span className="font-mono text-xs text-lime">ComfyUI</span>
-                <span className="font-mono text-xs text-cream-muted">×</span>
-                <span className="font-mono text-xs text-lime">RTX 4070Ti</span>
-              </div>
-            </div>
-          </footer>
-        </Providers>
+    <html lang="pt-BR" className={`${cormorant.variable} ${dmSans.variable}`}>
+      <body>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -409,6 +409,8 @@ export default function Home() {
           </div>
         </section>
 
+        <div className="deco-line" />
+
         <section className="section" id="dor">
           <span className="eyebrow">02 - Dor comercial</span>
           <h2>Você já fez as contas de quanto gasta com influencer por mês?</h2>
@@ -515,13 +517,17 @@ export default function Home() {
         </section>
 
         <section className="section guarantee" id="garantia">
-          <div className="seal">Garantia M2W<br />Setup 48h<br />ROI 1º trimestre</div>
+          <div className="seal">Setup 48h<br />ROI 1º trimestre</div>
           <div>
-            <span className="eyebrow">08 - Garantia</span>
-            <h2>Setup básico rodando em 48h após aprovação - ou devolvemos.</h2>
+            <span className="eyebrow">08 — Garantia</span>
+            <h2>Setup básico rodando em 48h após aprovação &mdash; ou devolvemos.</h2>
             <p>
               ROI não atingido no 1º trimestre? Continuamos sem custo adicional até atingir,
               conforme metas, escopo e condições definidos na proposta.
+            </p>
+            <p style={{ marginTop: "0.75rem" }}>
+              A garantia existe porque a metodologia funciona. Se não fosse assim, não
+              faríamos essa oferta.
             </p>
           </div>
         </section>
